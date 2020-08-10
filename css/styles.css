@@ -1,0 +1,659 @@
+/* Google Fonts */
+@import url("https://fonts.googleapis.com/css?family=Catamaran:400,700|Grand+Hotel");
+
+/* Variables */
+:root {
+  --clr-primary: #678e3e;
+  --clr-primary-light: #beed8c;
+  --clr-grey-1: #102a42;
+  --clr-grey-5: #617d98;
+  --clr-grey-10: #f1f5f8;
+  --clr-white: #fff;
+  --ff-primary: "Catamaran", sans-serif;
+  --ff-secondary: "Grand Hotel", cursive;
+  --transition: all 0.3s linear;
+  --spacing: 0.25rem;
+  --radius: 0.5rem;
+}
+
+/* Remove default Browser settings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* Set standard styling rules for the body */
+body {
+  font-family: var(--ff-primary);
+  background: var(--clr-white);
+  color: var(--clr-grey-1);
+  line-height: 1.5;
+  font-size: 0.875rem; /* 14px if Browser defaults to 16px */
+}
+
+a {
+  text-decoration: none;
+}
+
+/* For images within a container (like a div) */
+img {
+  width: 100%; /* Image will scale responsively */
+  display: block; /* Removes the white space below an image */
+}
+
+/* Small view - general rules for text elements */
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: var(--spacing);
+  text-transform: capitalize; /* Capitalize first letter of each word */
+  line-height: 1.25; /* Works as a %.  1.25 = 125% */
+  margin-bottom: 0.75rem;
+}
+h1 {
+  font-size: 3rem; /* 48px */
+}
+h2 {
+  font-size: 2rem; /* 32px */
+}
+h3 {
+  font-size: 1.5rem; /* 24px */
+}
+h4 {
+  font-size: 0.875rem; /* 14px */
+}
+p {
+  margin-bottom: 1.25rem;
+}
+
+/* For screens UP TO (min-width) 800px */
+@media screen and (min-width: 800px) {
+  h1 {
+    font-size: 4rem;
+  }
+  h2 {
+    font-size: 2.5rem;
+  }
+  h3 {
+    font-size: 2rem;
+  }
+  h4 {
+    font-size: 1rem;
+  }
+  body {
+    font-size: 1rem;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    line-height: 1;
+  }
+}
+
+/* More global CSS */
+.btn {
+  text-transform: uppercase;
+  background: var(--clr-primary);
+  color: var(--clr-white);
+  padding: 0.375rem 0.75rem;
+  letter-spacing: var(--spacing);
+  display: inline-block; /* Margins and Padding will be respected */
+  font-weight: 700;
+  transition: var(--transition);
+  font-size: 0.875rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+.btn:hover {
+  color: var(--clr-primary);
+  background: var(--clr-primary-light);
+}
+
+/* More supported but outdated fix for horizontal floated elements */
+/* .clearfix::after,
+.clearfix::before {
+  content: "";
+  clear: both;
+  display: table;
+} */
+
+.section-title h3 {
+  font-family: var(--ff-secondary);
+  color: var(--clr-primary);
+}
+.section-title {
+  margin-bottom: 2rem;
+}
+.section-center {
+  padding: 4rem 0;
+  width: 85vw; /* Width of each section is 85% of the viewport width */
+  margin: 0 auto;
+  max-width: 1170px; /* Limit the size on bigger screens. */
+  display: flow-root;
+}
+@media screen and (min-width: 992px) {
+  .section-center {
+    width: 95vw;
+    padding: 4rem 1rem;
+  }
+}
+
+/*
+==================
+Navbar
+==================
+*/
+/* Icon animation */
+@keyframes nav-icon-animation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.nav-btn {
+  position: fixed;
+  top: 5%;
+  left: 5%;
+  z-index: 1;
+  color: var(--clr-primary);
+  /* Change the user cursor to a pointer when hovering over the button */
+  cursor: pointer;
+  animation: nav-icon-animation 2s ease infinite;
+}
+.navbar {
+  position: fixed; /* So the navbar scrolls with the page */
+  /* Starting points for the navbar to cover the whole screen */
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  /* Alternative way of spanning the navbar across the whole screen
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%; */
+  z-index: 2;
+  background: var(--clr-grey-10);
+  /* So the navbar stands out in sections with the same background colour */
+  box-shadow: 2px 0 2px rgba(0, 0, 0, 0.2);
+  /* Hide the navbar by default */
+  transform: translateX(-100%);
+  transition: var(--transition);
+}
+.showNav {
+  /* Return the navbar back to its regular position */
+  transform: translate(0);
+}
+.navbar-header {
+  text-align: right;
+  padding: 1rem 1.5rem 0 0;
+}
+.nav-close {
+  cursor: pointer;
+  color: var(--clr-primary);
+  transition: var(--transition);
+}
+.nav-close:hover {
+  color: #2c4e05;
+  padding-right: 0.5rem;
+}
+.nav-links {
+  padding-top: 2rem;
+  list-style-type: none;
+}
+.nav-link {
+  display: block;
+  font-size: 1.5rem;
+  padding: 0.25rem 1rem;
+  text-transform: uppercase;
+  color: var(--clr-grey-5);
+  transition: var(--transition);
+}
+.nav-link:hover {
+  background: var(--clr-primary-light);
+  color: var(--clr-primary);
+  padding-left: 1.5rem; /* Indent animation effect */
+  border-left: 0.25rem solid var(--clr-primary);
+}
+@media screen and (min-width: 768px) {
+  .navbar {
+    width: 30vw;
+    /* Make sure it doesn't get too big on larger screens */
+    max-width: 20rem;
+  }
+}
+/*
+==================
+Header
+==================
+*/
+/* Header animation */
+@keyframes slideFromRight {
+  0% {
+    transform: translateX(100vw);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(-25vw);
+    opacity: 0.5;
+  }
+  75% {
+    transform: translateX(10vw);
+    opacity: 0.75;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideFromLeft {
+  0% {
+    transform: translateX(-100vw);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(25vw);
+    opacity: 0.5;
+  }
+  75% {
+    transform: translateX(-10vw);
+    opacity: 0.75;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes header-btn-animation {
+  0% {
+    transform: scale(2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.header {
+  min-height: 100vh; /* Cover the entire screen, regardless of device */
+  /* Semi-transparent linear-gradient to darken the image*/
+  /* Shorthand code for image properties */
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(../images/main-bcg.jpeg) center/cover no-repeat fixed;
+  position: relative; /* Centring the text requires a descendant with position:relative so the text can use position:absolute */
+  /* Since the title animation goes off the screen it will create a horizontal scroll bar.  overflow-x: hidden prevents that. */
+  overflow-x: hidden;
+}
+.banner {
+  text-align: center;
+  position: absolute; /* Centre the text relative to the banner */
+  /* Centre the text.  The texts origin point is on the bottom left corner, so to centre it perfectly you need to translate the text 50% of its own width and height. */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.banner h2 {
+  font-family: var(--ff-secondary);
+  color: var(--clr-primary);
+  /* animation */
+  transition: var(--transition);
+  animation: slideFromRight 4s ease-in-out 1;
+}
+.banner h1 {
+  text-transform: uppercase;
+  color: var(--clr-white);
+  margin-top: 1.25rem;
+  margin-bottom: 2rem;
+  /* animation */
+  transition: var(--transition);
+  animation: slideFromLeft 4s ease-in-out 1;
+}
+/* Specific settings for the main banner button */
+.banner-btn {
+  outline: 0.125rem solid var(--clr-primary);
+  outline-offset: 0.25rem;
+  font-size: 1.25rem;
+  padding: 1rem 1.75rem;
+  transition: var(--transition);
+  animation: header-btn-animation 4s ease 1;
+}
+/* Content divider */
+.content-divider {
+  height: 0.5rem;
+  background: linear-gradient(
+    to right,
+    var(--clr-primary),
+    #e9b949,
+    var(--clr-primary)
+  );
+}
+
+/*
+==================
+Header
+==================
+*/
+.skills {
+  background: var(--clr-grey-10);
+  display: flow-root;
+}
+.skill {
+  padding: 2.5rem 0;
+  text-align: center;
+  transition: var(--transition);
+}
+.skill-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1.25rem;
+  transition: var(--transition); /* Icon movement */
+  display: inline-block; /* Span by default is an inline element, so changing it to inline-block makes the span respect the margin value */
+  color: var(--clr-primary);
+}
+.skill-text {
+  color: var(--clr-grey-5);
+  max-width: 17rem; /* max-width - up to */
+  margin: 0 auto; /* With a max-width the text no longer centres, as the element is no longer spanning the entire screen. So, margin: 0 auto is used to centre the element. */
+}
+.skill:hover {
+  background: var(--clr-white);
+  /* No x value or blur makes the box-shadow look like a simple line */
+  box-shadow: 0 2px var(--clr-primary);
+}
+/* Make the icon move when hovering over the entire article */
+.skill:hover .skill-icon {
+  transform: translateY(-5px);
+}
+/* starting from 576px */
+@media screen and (min-width: 576px) {
+  .skill {
+    float: left;
+    width: 50%;
+  }
+}
+/* starting from 1200px */
+@media screen and (min-width: 1200px) {
+  .skill {
+    /* The float value carries over from the previous media query */
+    width: 25%;
+  }
+}
+
+/*
+==================
+About
+==================
+*/
+.about-img,
+.about-info {
+  padding: 2rem 0;
+}
+.about-picture-container {
+  background: var(--clr-primary);
+  border: 0.35rem solid var(--clr-primary);
+  max-width: 30rem;
+  /* Hide the parts of the image that overflow when scaled up*/
+  overflow: hidden;
+}
+.about-picture {
+  transition: var(--transition);
+}
+.about-picture-container:hover .about-picture {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+.about-text {
+  max-width: 26rem;
+  color: var(--clr-grey-5);
+}
+@media screen and (min-width: 992px) {
+  .about-img,
+  .about-info {
+    float: left;
+    width: 50%;
+  }
+  .about-info {
+    padding-left: 2rem;
+  }
+}
+
+/*
+==================
+Products
+==================
+*/
+.products {
+  background: var(--clr-grey-10);
+}
+.products article {
+  padding: 2rem 0;
+}
+.products-text {
+  color: var(--clr-grey-5);
+  max-width: 26rem;
+}
+.product {
+  margin-bottom: 2rem;
+}
+.product-img {
+  border-radius: var(--radius);
+  margin-bottom: 2rem;
+  /* Make the images vertically smaller without distorting them */
+  height: 17rem;
+  object-fit: cover;
+}
+.product-price {
+  color: var(--clr-primary);
+}
+@media screen and (min-width: 768px) {
+  .product {
+    float: left;
+    width: 50%;
+    padding-right: 2rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .product {
+    width: 33.33%;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .products-info {
+    float: left;
+    width: 30%;
+  }
+  .products-inventory {
+    float: left;
+    width: 70%;
+  }
+  .product {
+    margin-bottom: 0; /* Remove the margin that was used for the smaller display */
+    padding: 0 0 0 2rem;
+  }
+}
+
+/*
+==================
+Services
+==================
+*/
+.services-title {
+  text-align: center;
+  margin: 4rem 0 -4rem 0;
+}
+.services-card {
+  background: var(--clr-grey-10);
+  margin: 2rem 0;
+  /* padding-bottom: 2rem; */
+  border-radius: var(--radius);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: var(--transition);
+  /* max-width: 350px; */
+}
+.services-card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transform: scale(1.02);
+}
+.services-img {
+  border-radius: 0.5rem 0.5rem 0 0;
+  height: 17rem;
+  object-fit: cover;
+}
+.services-info {
+  text-align: center;
+  padding: 3rem 1rem 2.5rem 1rem;
+}
+.services-info p {
+  max-width: 20rem;
+  margin: 0 auto;
+  color: var(--clr-grey-5);
+}
+.services-btn {
+  border-radius: var(--radius);
+  text-transform: capitalize;
+  font-size: 0.75rem;
+  font-weight: 400;
+  padding: 0.375rem 0.5rem;
+  margin-top: 1.25rem;
+}
+.services-img-container {
+  position: relative;
+}
+.services-icon {
+  color: var(--clr-primary);
+  background: var(--clr-primary-light);
+  border-radius: 50%;
+  border: 0.375rem solid var(--clr-grey-10);
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  font-size: 2rem; /* Scales the icon */
+  padding: 0.25rem 0.52rem;
+  transform: translate(-50%, 50%);
+}
+@media screen and (min-width: 768px) {
+  .services-card {
+    float: left;
+    /* 2 collumn layout, two 45% width cards = 90% and two 5% card margins = 10%.  So, in total, 100% of the width. */
+    width: 45%;
+    margin-right: 5%;
+  }
+}
+@media screen and (min-width: 992px) {
+  .services-card {
+    width: 30%;
+    margin-right: 3.333%;
+  }
+}
+
+/*
+==================
+Contact Form
+==================
+*/
+.contact {
+  background: var(--clr-grey-10);
+}
+.contact-info-item {
+  margin-bottom: 2rem;
+}
+.contact-info-title {
+  color: var(--clr-primary);
+  font-weight: 400;
+}
+.contact-info-text {
+  text-transform: uppercase;
+}
+.contact-form {
+  background: var(--clr-white);
+  max-width: 35rem;
+  text-align: center;
+  border-radius: var(--radius);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: var(--transition);
+}
+.contact-form:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+.contact-form h3 {
+  color: var(--clr-grey-5);
+  padding-top: 1.25rem;
+}
+.form-group {
+  padding: 1rem 1.5rem; /* Padding for the inputs */
+}
+.form-control {
+  display: block;
+  border: none;
+  padding: 0.75rem 1rem; /* More space in the input fields */
+  margin-bottom: 1.25rem;
+  width: 100%;
+  background: var(--clr-grey-10);
+  color: var(--clr-grey-1);
+  border-radius: var(--radius);
+  font-family: var(--ff-primary);
+  font-size: 0.875rem;
+  letter-spacing: 0.1rem;
+}
+/* Placeholder text in some browsers won't inherit properties unless targeted directly. */
+.form-control::placeholder {
+  font-family: var(--ff-primary);
+  color: var(--clr-grey-1);
+  text-transform: uppercase;
+  letter-spacing: var(--spacing);
+}
+.submit-btn {
+  display: block;
+  width: 100%;
+  border-radius: 0 0 0.5rem 0.5rem;
+  padding: 1rem 0;
+}
+@media screen and (min-width: 992px) {
+  .contact-info {
+    float: left;
+    width: 40%;
+  }
+  .contact-form {
+    float: left;
+    width: 60%;
+  }
+}
+
+/*
+==================
+Footer
+==================
+*/
+.footer {
+  background: #222;
+  text-align: center;
+  padding: 3rem 0 2rem 0;
+}
+.social-icons {
+  margin-bottom: 1.5rem;
+}
+.social-icon {
+  color: var(--clr-white);
+  margin-right: 1rem;
+  transition: var(--transition);
+}
+.social-icon:hover {
+  transform: scale(1.2);
+  color: var(--clr-primary);
+}
+.footer-text {
+  color: var(--clr-white);
+  text-transform: uppercase;
+  letter-spacing: var(--spacing);
+  font-weight: 400;
+}
+.footer-company-name {
+  color: var(--clr-primary);
+}
